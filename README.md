@@ -35,4 +35,27 @@ REPOSITORY          TAG                 IMAGE ID            CREATED             
 [your image name]		latest              ccb7994d2bc1        39 seconds ago         499.8 MB
 ```
 
+Try run the docker container quietly. If you love some details, just strip that `-d` argument.
+```shell
+$ sudo docker run -t -d -p 5000:5000 [image name]
+```
+
+You can check if the containers running or not on your machine. Don't forget to note both of container id and container names (that one with fancy name lol). 
+```shell
+$ sudo docker ps 
+```
+
+For now, your application is perfectly running. *But* your application currently didn't have any database. You should create one. Enter your running docker container with container id or name. 
+```shell
+$ sudo docker exec -it [container id / container name] /bin/bash
+```
+
+And then move the working directory to `/app` and execute migration command.
+```shell
+# cd /app
+# dotnet ef migrations add MyFirstMigration
+# dotnet ef database update
+```
+
+
 ... to be continued

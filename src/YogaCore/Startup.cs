@@ -32,8 +32,13 @@ namespace YogaCore
             // Add framework services.
             services.AddMvc();
 
-            var connection = @"Server=(localdb)\mssqllocaldb;Database=YogaCore.Match;Trusted_Connection=True;";
-            services.AddDbContext<MatchContext>(options => options.UseSqlServer(connection));
+            // Add database context with sqlite database
+            string dbConnectionString = Configuration.GetConnectionString("DefaultSQLITEConnectionString");
+            services.AddDbContext<MatchContext>(options => options.UseSqlite(dbConnectionString));
+
+            // If you are on windows platform, you can use sql server instead sqlite
+            // string dbConnectionString = Configuration.GetConnectionString("DefaultMSSQLConnectionString");
+            // services.AddDbContext<MatchContext>(options => options.UseSqlServer(dbConnectionString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

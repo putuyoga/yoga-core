@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6B765EBD-E789-4F25-BE76-CDAA83646A18}"
 	ProjectSection(SolutionItems) = preProject
 		global.json = global.json
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "YogaCore", "src\YogaCore\YogaCore.xproj", "{28790BC8-0E0E-4428-8CEA-BE2CE2371DF7}"

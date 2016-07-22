@@ -17,16 +17,17 @@ namespace YogaCore.Controllers.API
         public PersonController(MatchContext context)
         {
             _context = context;
+            //System.Threading.Thread.Sleep(5000);
         }
 
-        // GET: api/values
+        // GET: api/person
         [HttpGet]
         public IEnumerable<Person> Get()
         {
             return _context.Persons.ToList();
         }
 
-        // GET: api/values/man
+        // GET: api/person/man
         [HttpGet("man")]
         public IEnumerable<Person> GetBySexMan()
         {
@@ -34,7 +35,7 @@ namespace YogaCore.Controllers.API
                 .Where(person => person.Sex == Sex.Man).ToList();
         }
 
-        // GET: api/values/man
+        // GET: api/person/woman
         [HttpGet("woman")]
         public IEnumerable<Person> GetBySexWoman()
         {
@@ -42,7 +43,7 @@ namespace YogaCore.Controllers.API
                 .Where(person => person.Sex == Sex.Woman).ToList();
         }
 
-        // GET api/values/5
+        // GET api/person/5
         [HttpGet("{id}")]
         public IActionResult Get(string id)
         {
@@ -70,7 +71,7 @@ namespace YogaCore.Controllers.API
             return BadRequest();
         }
 
-        // PUT api/values/5
+        // PUT api/person/5
         [HttpPut("{id}")]
         public IActionResult Put(string id, [FromBody]Person value)
         {
@@ -94,7 +95,7 @@ namespace YogaCore.Controllers.API
             
         }
 
-        // DELETE api/values/5
+        // DELETE api/person/5
         [HttpDelete("{id}")]
         public IActionResult Delete(string id)
         {
@@ -104,7 +105,7 @@ namespace YogaCore.Controllers.API
                 return BadRequest();
             }
             _context.Remove(personEntity);
-
+            _context.SaveChanges();
             return NoContent();
         }
     }

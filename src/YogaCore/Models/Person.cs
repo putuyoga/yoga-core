@@ -12,8 +12,10 @@ namespace YogaCore.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
 
+        [Required]
         public string FirstName { get; set; }
 
+        [Required]
         public DateTime BirthDate { get; set; }
 
         [Range(0,1)]

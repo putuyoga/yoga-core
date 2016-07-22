@@ -11,12 +11,47 @@
   {
     "outputFileName": "wwwroot/js/site.min.js",
     "inputFiles": [
-      "wwwroot/js/site.js"
+      "wwwroot/js/site.js",
+      "\\"
     ],
     // Optionally specify minification options
     "minify": {
       "enabled": true,
       "renameLocals": true
+    },
+    // Optinally generate .map file
+    "sourceMap": false
+  },
+
+  // app.js for staging & production
+  {
+    "outputFileName": "wwwroot/js/app.min.js",
+    "inputFiles": [
+      "wwwroot/app/*.js",
+      "wwwroot/app/**/*.js",
+      "\\"
+    ],
+    // Optionally specify minification options
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    // Optinally generate .map file
+    "sourceMap": false
+  },
+
+  // app.js for for development
+  {
+    "outputFileName": "wwwroot/js/app.js",
+    "inputFiles": [
+      "wwwroot/app/*.js",
+      "wwwroot/app/**/*.js",
+      "\\"
+    ],
+    // Optionally specify minification options
+    "minify": {
+      "enabled": false,
+      "renameLocals": false
     },
     // Optinally generate .map file
     "sourceMap": false

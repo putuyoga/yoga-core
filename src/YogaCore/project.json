@@ -1,4 +1,6 @@
 {
+  "userSecretsId": "aspnet-yogacore-a19sr93-13dd-439c-84b9-9f2ecb0ac21c",
+
   "dependencies": {
     "Microsoft.NETCore.App": {
       "version": "1.0.0",
@@ -23,7 +25,10 @@
     "Microsoft.EntityFrameworkCore": "1.0.0",
     "Microsoft.EntityFrameworkCore.Design": "1.0.0-preview2-final",
     "Microsoft.EntityFrameworkCore.SqlServer": "1.0.0",
-    "Microsoft.EntityFrameworkCore.Sqlite": "1.0.0"
+    "Microsoft.EntityFrameworkCore.Sqlite": "1.0.0",
+    "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
+    "Microsoft.Extensions.Configuration.UserSecrets": "1.0.0",
+    "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "1.0.0"
   },
 
   "tools": {

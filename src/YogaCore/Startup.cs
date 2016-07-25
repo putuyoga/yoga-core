@@ -9,6 +9,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using YogaCore.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using YogaCore.Extensions;
+using YogaCore.Data;
 
 namespace YogaCore
 {
@@ -21,6 +27,12 @@ namespace YogaCore
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
+
+            if (env.IsDevelopment())
+            {
+                builder.AddUserSecrets();
+            }
+
             Configuration = builder.Build();
         }
 
@@ -36,13 +48,24 @@ namespace YogaCore
             string dbConnectionString = Configuration.GetConnectionString("DefaultSQLITEConnectionString");
             services.AddDbContext<MatchContext>(options => options.UseSqlite(dbConnectionString));
 
+            services.AddIdentity<Person, IdentityRole>()
+                .AddEntityFrameworkStores<MatchContext>()
+                .AddDefaultTokenProviders();
+
+            services.AddSingleton<IPersonRepository, PersonRepository>();
+
             // If you are on windows platform, you can use sql server instead sqlite
             // string dbConnectionString = Configuration.GetConnectionString("DefaultMSSQLConnectionString");
             // services.AddDbContext<MatchContext>(options => options.UseSqlServer(dbConnectionString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public async void Configure(
+            IApplicationBuilder app, 
+            IHostingEnvironment env, 
+            ILoggerFactory loggerFactory,
+            RoleManager<IdentityRole> roleManager,
+            UserManager<Person> userManager)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -50,6 +73,7 @@ namespace YogaCore
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
                 app.UseBrowserLink();
             }
             else
@@ -57,7 +81,13 @@ namespace YogaCore
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            // If you need some sample data, uncomment below
+            //await roleManager.LoadSample();
+            //await userManager.LoadSample();
+
             app.UseStaticFiles();
+
+            app.UseIdentity();
 
             app.UseMvc(routes =>
             {
@@ -65,6 +95,8 @@ namespace YogaCore
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+
         }
     }
 }

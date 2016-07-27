@@ -72,12 +72,15 @@
 
         function saveComplete(msg) {
             stopAction();
-            $state.go('person_list')
+            $state.go('person_list');
         }
 
         function getDataComplete(msg)
         {
             stopAction();
+            
+            // little hack 
+            msg.data.birthDate = new Date(msg.data.birthDate);
             vm.data = msg.data;
         }
 

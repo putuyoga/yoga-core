@@ -1,6 +1,7 @@
 # Yoga-Core project.
 
 Hello, welcome to my simple project. This is my personal repository that contain several experiments on one application, including but not limited to:
+
 1. ASP.NET Core (previously known as ASP.NET 5)
 2. Entity Framework Core
 3. Single Page Application concept with AngularJS

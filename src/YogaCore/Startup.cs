@@ -53,6 +53,7 @@ namespace YogaCore
                 .AddDefaultTokenProviders();
 
             services.AddSingleton<IPersonRepository, PersonRepository>();
+            services.AddSingleton<IIdentityManager, PersonManager>();
 
             // If you are on windows platform, you can use sql server instead sqlite
             // string dbConnectionString = Configuration.GetConnectionString("DefaultMSSQLConnectionString");
@@ -60,7 +61,7 @@ namespace YogaCore
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public async void Configure(
+        public void Configure(
             IApplicationBuilder app, 
             IHostingEnvironment env, 
             ILoggerFactory loggerFactory,
@@ -82,8 +83,8 @@ namespace YogaCore
             }
 
             // If you need some sample data, uncomment below
-            //await roleManager.LoadSample();
-            //await userManager.LoadSample();
+            //roleManager.LoadSample().RunSynchronously();
+            //userManager.LoadSample().RunSynchronously();
 
             app.UseStaticFiles();
 

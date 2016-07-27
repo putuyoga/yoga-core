@@ -7,8 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using YogaCore.Models;
 using YogaCore.ViewModels.Accounts;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Http.Authentication;
+using YogaCore.Data;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -17,15 +16,11 @@ namespace YogaCore.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        private readonly SignInManager<Person> _signInManager;
-        private readonly UserManager<Person> _userManager;
+        private IIdentityManager _accountManager;
 
-        public AccountController(
-            UserManager<Person> userManager,
-            SignInManager<Person> signInManager)
+        public AccountController(IIdentityManager accountManager)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
+            _accountManager = accountManager;
         }
 
         //
@@ -48,10 +43,8 @@ namespace YogaCore.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, lockoutOnFailure: false);
-                if (result.Succeeded)
+                var loginSuccess = await _accountManager.LoginAsync(model.Email, model.Password);
+                if (loginSuccess)
                 {
                     return RedirectToLocal(returnUrl);
                 }
@@ -88,10 +81,10 @@ namespace YogaCore.Controllers
             if (ModelState.IsValid)
             {
                 var user = new Person { UserName = model.Email, Email = model.Email };
-                var result = await _userManager.CreateAsync(user, model.Password);
+                var result = await _accountManager.RegisterAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    await _accountManager.LoginAsync(model.Email, model.Password);
                     return RedirectToLocal(returnUrl);
                 }
                 AddErrors(result);
@@ -107,7 +100,7 @@ namespace YogaCore.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> LogOff()
         {
-            await _signInManager.SignOutAsync();
+            await _accountManager.LogoutAsync();
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
@@ -129,14 +122,14 @@ namespace YogaCore.Controllers
             }
         }
 
-        private Task<Person> GetCurrentUserAsync()
-        {
-            return _userManager.GetUserAsync(HttpContext.User);
-        }
+        //private Task<Person> GetCurrentUserAsync()
+        //{
+        //    return _userManager.GetUserAsync(HttpContext.User);
+        //}
 
         private IActionResult RedirectToLocal(string returnUrl)
         {
-            if (Url.IsLocalUrl(returnUrl))
+            if (Url != null && Url.IsLocalUrl(returnUrl))
             {
                 return Redirect(returnUrl);
             }

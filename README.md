@@ -8,6 +8,12 @@ Hello, welcome to my simple project. This is my personal repository that contain
 5. Unit Test with XUnit
 6. ... etc
 
+## Table of Contents
+1. [The Main Goal](#the-main-goal)
+2. [Windows Platform](#windows-platform)
+3. [Linux Platform](#linux-platform)
+4. [Docker on Linux Platform](docker-on-linux-platform)
+
 ## The Main Goal
 The goal i've made this repository is to make sure that i know **how to** develop, build and run a simple asp.net core application both on windows and linux platform.
 
@@ -66,13 +72,12 @@ If your work environment are behind corporate proxy wall like me, maybe you gett
 the root of problem is we can not automatically add the signature from keyserver because that proxy, even we add the proxy configuration to command!
 
 So the solution for that one is below :
+
 1. Run : `sudo apt-get update` and get the id of pubkey, as we do the same topic, so the key should be `417A0893`. 
 2. Open http://keyserver.ubuntu.com and search the key with `0x417A0893` and hit the search button. You can obtain the public server key from [there](http://keyserver.ubuntu.com/pks/lookup?op=get&search=0xB02C46DF417A0893). 
 3. Download the file/txt, whatever your tools, my favorit is using wget. 
 4. And then run : `sudo apt-key add key.txt` to add the key. 
 5. Run again `sudo apt-get update` and you should get working repository. 
-
-
 
 
 ## Docker on Linux Platform

@@ -1,18 +1,44 @@
 # Yoga-Core project.
 
-Hello, welcome to my simple project. This is a repository that contain several experiments on asp.net core, entity framework core. The goal is to make sure that we can build and run some simple asp.net core application both on windows and linux platform.
+Hello, welcome to my simple project. This is my personal repository that contain several experiments, including but not limited to:
+1. ASP.NET Core (previously known as ASP.NET 5)
+2. Entity Framework Core
+3. Single Page Application concept with AngularJS
+4. Responsive Design with Bootstrap
+5. Unit Test with XUnit
+6. ... etc
 
-## LINUX PLATFORM
+## The Main Goal
+The goal is to make sure that i know **how to** develop, build and run a simple asp.net core application both on windows and linux platform.
 
-For linux platform, make sure `DOCKER` are installed on your machine. for how-to-install-that-docker, please refer to this [link](https://docs.docker.com/engine/installation/linux/ubuntulinux/).
-
-### 1. Get the source code
-You need to clone this repository.
+You need to clone this repository to make sure you get the sample working source code. 
 ```shell
 $ git clone https://github.com/putuyoga/yoga-core.git yoga-core
 ```
 
-Modify the `./src/YogaCore/Dockerfile` as needed. If your work environment are behind proxy, just change the proxy configuration. If not, delete the line that mention proxy.
+## Windows
+TBA
+
+## Linux Platform
+TBA
+
+
+## Docker on Linux Platform
+
+What is Docker and why i prefer it than a traditional virtual machine ?
+In a short, Docker is a leading containerization platform. 
+
+Instead having multiple virtual machine for multiple application on a host machine, you just having multiple container on a host machine. 
+
+Much less resource usage comparing with virtual machine but still share same benefit, the __isolation environment__.
+
+For linux platform, make sure `DOCKER` are installed on your machine. For `how-to-install-that-docker`, please refer to this [link](https://docs.docker.com/engine/installation/linux/ubuntulinux/).
+
+Thanks to the community, we already have an [asp.net core docker image](https://hub.docker.com/r/microsoft/aspnet/), so it will be less step required to build an image for asp.net application.
+
+
+### 1. Modify Dockerfile
+Modify the `./src/YogaCore/Dockerfile` as needed. If your work environment are behind proxy wall, just change the proxy configuration. If not, just delete the line that mention proxy.
 ```shell
 $ vim ./yoga-core/src/YogaCore/Dockerfile
 ```

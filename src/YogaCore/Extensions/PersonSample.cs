@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using YogaCore.Models;
 
@@ -10,8 +7,14 @@ namespace YogaCore.Extensions
 {
     public static class PersonSample
     {
+        /// <summary>
+        /// Create some sample person data
+        /// </summary>
+        /// <param name="userManager">Instance that do some basic operation for user</param>
+        /// <returns></returns>
         public static async Task LoadSample(this UserManager<Person> userManager)
         {
+            // Look up the person first
             var email = "putuyoga@outlook.com";
             var role = "Administrator";
             var existPerson = await userManager.FindByEmailAsync(email);
@@ -26,6 +29,8 @@ namespace YogaCore.Extensions
                     Sex = Sex.Man,
                     Email = email
                 };
+
+                // create person
                 var result = await userManager.CreateAsync(person, "putuyoga@GMAIL.com");
                 var newPerson = await userManager.FindByEmailAsync(email);
 

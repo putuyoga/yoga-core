@@ -3,7 +3,12 @@
 
 @inject SignInManager<Person> SignInManager
 @inject UserManager<Person> UserManager
+@{ 
 
+    var user = await UserManager.GetUserAsync(User);
+
+    var role = user == null ? null : await UserManager.GetRolesAsync(user);
+}
 @if (SignInManager.IsSignedIn(User))
 {
     <form asp-area="" asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm" class="navbar-right">
@@ -11,6 +16,12 @@
             <li>
                 <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
             </li>
+@if (role != null && role.Contains("Administrator"))
+{
+            <li>
+                <a asp-area="" asp-controller="Admin" asp-action="Index" title="Dashboard Admin">Admin</a>
+            </li>
+}
             <li>
                 <button type="submit" class="btn btn-link navbar-btn navbar-link">Log off</button>
             </li>
@@ -20,7 +31,7 @@
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li><a asp-area="" asp-controller="Account" asp-action="Register">Register</a></li>
-        <li><a asp-area="" asp-controller="Account" asp-action="Login">Log in</a></li>
+        <li><a asp-area="" asp-controller="Account" asp-action="Register">Join</a></li>
+        <li><a asp-area="" asp-controller="Account" asp-action="Login">Login</a></li>
     </ul>
 }

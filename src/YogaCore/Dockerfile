@@ -1,7 +1,8 @@
 FROM microsoft/dotnet:latest
 
-ENV http_proxy "http://192.168.56.1:8889"
-ENV https_proxy "http://192.168.56.1:8889"
+# Uncomment below, if your environment are behind proxy
+# ENV http_proxy "http://192.168.56.1:8889"
+# ENV https_proxy "http://192.168.56.1:8889"
 
 COPY . /app
 WORKDIR /app

@@ -54,7 +54,6 @@ namespace YogaCore
 
             services.AddSingleton<IPersonRepository, PersonRepository>();
             services.AddSingleton<IIdentityManager, PersonManager>();
-
             // If you are on windows platform, you can use sql server instead sqlite
             // string dbConnectionString = Configuration.GetConnectionString("DefaultMSSQLConnectionString");
             // services.AddDbContext<MatchContext>(options => options.UseSqlServer(dbConnectionString));
@@ -76,6 +75,7 @@ namespace YogaCore
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
                 app.UseBrowserLink();
+
             }
             else
             {
@@ -83,8 +83,10 @@ namespace YogaCore
             }
 
             // If you need some sample data, uncomment below
-            //roleManager.LoadSample().RunSynchronously();
-            //userManager.LoadSample().RunSynchronously();
+            Task.Run(async () =>
+            {
+                await app.LoadSample();
+            });
 
             app.UseStaticFiles();
 

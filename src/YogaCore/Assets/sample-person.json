@@ -1,0 +1,63 @@
+﻿{
+  "BirthDate": "1993-11-07",
+  "Educations": [
+    {
+      "Major": "Informatics Engineering",
+      "SchoolName": "Universitas Brawijaya",
+      "Since": "2011-07-11",
+      "Until": "2015-07-11"
+    }
+  ],
+  "Email": "putuyoga@outlook.com",
+  "Experience": [
+    {
+      "JobPosition": "Windows Phone Developer",
+      "Company": "CV. Raion Studio",
+      "Since": "2014-02-08",
+      "Until": "2014-10-12"
+    },
+    {
+      "JobPosition": "Software Engineer",
+      "Company": "Mitrais",
+      "Since": "2016-07-11",
+      "Until": "0000-00-00"
+    }
+  ],
+  "FirstName": "I Putu Yoga",
+  "ImageUrl": "https://pbs.twimg.com/profile_images/635167227608608768/C9SwX9bZ.jpg",
+  "LastName": "Permana",
+  "Sex": 1,
+  "Skills": [
+    {
+      "Name": "C#",
+      "Level": 7
+    },
+    {
+      "Name": "PHP",
+      "Level": 7
+    },
+    {
+      "Name": "Windows Phone 8",
+      "Level": 9
+    },
+    {
+      "Name": "Xamarin",
+      "Level": 6
+    },
+    {
+      "Name": "Javascript",
+      "Level": 6
+    },
+    {
+      "Name": "React.js",
+      "Level": 5
+    },
+    {
+      "Name": "Angular.js",
+      "Level": 5
+    }
+  ],
+  "Title": "Software Engineer",
+  "Username": "putuyoga",
+  "Website": "http://putuyoga.com"
+}

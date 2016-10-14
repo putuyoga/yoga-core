@@ -43,7 +43,7 @@ namespace YogaCore.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var loginSuccess = await _accountManager.LoginAsync(model.Email, model.Password);
+                var loginSuccess = await _accountManager.LoginAsync(model.Username, model.Password);
                 if (loginSuccess)
                 {
                     return RedirectToLocal(returnUrl);
@@ -105,12 +105,17 @@ namespace YogaCore.Controllers
         }
 
 
-        // GET: /<controller>/
+        // GET: /Account/
         public IActionResult Index()
         {
             return View();
         }
 
+        // GET: /Account/Profile
+        public IActionResult Profile()
+        {
+            return View();
+        }
 
         #region Helpers
 

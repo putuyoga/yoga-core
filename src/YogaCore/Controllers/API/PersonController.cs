@@ -3,15 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using YogaCore.Models;
-using Microsoft.EntityFrameworkCore;
 using YogaCore.ViewModels.API;
-using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using YogaCore.Data;
-
-// For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace YogaCore.Controllers.API
 {

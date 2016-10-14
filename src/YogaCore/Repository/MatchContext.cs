@@ -10,7 +10,12 @@ namespace YogaCore.Models
         { }
 
         public DbSet<Person> Persons { get; set; }
+        
+        public DbSet<Skill> Skills { get; set; }
 
+        public DbSet<Experience> Experiences { get; set; }
+
+        public DbSet<Education> Educations { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -19,6 +24,5 @@ namespace YogaCore.Models
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
-        
     }
 }

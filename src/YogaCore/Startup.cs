@@ -64,8 +64,7 @@ namespace YogaCore
             IApplicationBuilder app, 
             IHostingEnvironment env, 
             ILoggerFactory loggerFactory,
-            RoleManager<IdentityRole> roleManager,
-            UserManager<Person> userManager)
+            RoleManager<IdentityRole> roleManager)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -75,7 +74,6 @@ namespace YogaCore
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
                 app.UseBrowserLink();
-
             }
             else
             {
@@ -85,7 +83,7 @@ namespace YogaCore
             // If you need some sample data, uncomment below
             Task.Run(async () =>
             {
-                await app.LoadSample();
+                await app.CreateSample(env);
             });
 
             app.UseStaticFiles();

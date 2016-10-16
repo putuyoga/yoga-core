@@ -17,10 +17,14 @@ namespace YogaCore.Controllers
     public class AccountController : Controller
     {
         private IIdentityManager _accountManager;
+        private UserManager<Person> _userManager;
+        private IPersonRepository _repository;
 
-        public AccountController(IIdentityManager accountManager)
+        public AccountController(IIdentityManager accountManager, UserManager<Person> userManager, IPersonRepository repository)
         {
             _accountManager = accountManager;
+            _userManager = userManager;
+            _repository = repository;
         }
 
         //
@@ -112,9 +116,19 @@ namespace YogaCore.Controllers
         }
 
         // GET: /Account/Profile
-        public IActionResult Profile()
+        public async Task<IActionResult> Profile()
         {
-            return View();
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            if (user != null)
+            {
+                var userData = _repository.Get(user.Id);
+                ViewData["User"] = userData;
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
         }
 
         #region Helpers

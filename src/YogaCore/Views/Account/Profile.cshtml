@@ -1,12 +1,11 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using YogaCore.Models
 @{
+    var user = ViewData["User"] as Person;
 }
 <div id="section-personal" class="personal section">
     <div class="row">
         <div class="col-md-10">
-            <h1>I Putu Yoga Permana</h1>
+            <h1>@user.FirstName @user.LastName</h1>
             <div id="currently-at-container" class="job">
                 <div class="job has-tooltip">
                     Software Engineer at Mitrais
@@ -27,7 +26,7 @@
 
         <div class="col-md-2 avatar-wrapper">
             <div class="avatar">
-                <img title="change picture" src="https://www.gravatar.com/avatar/f5ebd4c466b1f9cc71cd04c26aacad0e?s=136&amp;r=PG&amp;d=https://i.stack.imgur.com/T119o.png">
+                <img title="change picture" src="@user.ImageUrl">
             </div>
         </div>
     </div>
@@ -36,17 +35,16 @@
 
 <div class="section">
     <div class="section-header section-opener">
-        <h2>Technologies</h2>
+        <h2>Skillset</h2>
     </div>
 
     <div class="tag-section">
-        <div class="tag-section-title">Tech you want to work with</div>
+        <div class="tag-section-title">Any skill you have</div>
         <div>
-            <span class="post-tag">javascript</span>
-            <span class="post-tag">go</span>
-            <span class="post-tag">reactjs</span>
-            <span class="post-tag">react-native</span>
-            <span class="post-tag">asp.net-core</span>
+            @foreach (var skill in user.Skills)
+            {
+                <span class="post-tag">@skill.Name</span>
+            }
         </div>
     </div>
 </div>
@@ -62,33 +60,29 @@
 
     <div class="repeater cv-section highlight first expanded last collapsible" id="Experience-584419">
         <div class="display">
-            <div class="preview">
-                <div class="row">
-                    <div class="col-md-8">
-                        <h3 class="h4">
-                            Software Engineer                                <span class="location">
-                                Mitrais
-                            </span>
-                        </h3>
-                    </div>
-                    <div class="col-md-4">
-                        <p class="time-frame">
-                            Jul 2016 → Current
-                        </p>
+            @foreach (var exp in user.Experiences) {
+                <div class="preview">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h3 class="h4">
+                                @exp.JobPosition
+                                <span class="location">
+                                    @exp.CompanyName
+                                </span>
+                            </h3>
+                        </div>
+                        <div class="col-md-4">
+                            <p class="time-frame">
+                                @exp.Since → @exp.Until
+                            </p>
+                        </div>
                     </div>
                 </div>
-
-                <div class="timeline-item-tags">
-                    <span class="post-tag">.net</span>
-                </div>
-
-            </div>
+            }
         </div>
     </div>
 
 </div>
-
-
 
 <div class="section cv-section-type multi-section" id="cv-Education">
     <div class="section-header section-opener">
@@ -99,25 +93,26 @@
 
     <div class="repeater cv-section highlight first expanded last collapsible" id="Education-584418">
         <div class="display">
+            @foreach (var school in user.Educations)
+            {
             <div class="preview">
                 <div class="row">
                     <div class="col-md-8">
                         <h3 class="h4">
-                            B. S. Informatics Engineering                                
+                            @school.Major                  
                             <span class="location">
-                                Universitas Brawijaya
+                                @school.SchoolName
                             </span>
                         </h3>
                     </div>
                     <div class="col-md-4">
                         <p class="time-frame">
-                            2011 → 2015
+                            @school.Since → @school.Until
                         </p>
                     </div>
                 </div>
-
-
             </div>
+            }
         </div>
     </div>
 

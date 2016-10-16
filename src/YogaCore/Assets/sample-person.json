@@ -9,7 +9,7 @@
     }
   ],
   "Email": "putuyoga@outlook.com",
-  "Experience": [
+  "Experiences": [
     {
       "JobPosition": "Windows Phone Developer",
       "Company": "CV. Raion Studio",
@@ -20,7 +20,7 @@
       "JobPosition": "Software Engineer",
       "Company": "Mitrais",
       "Since": "2016-07-11",
-      "Until": "0000-00-00"
+      "Until": "2222-12-12"
     }
   ],
   "FirstName": "I Putu Yoga",

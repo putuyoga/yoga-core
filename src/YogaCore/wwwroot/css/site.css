@@ -1,13 +1,66 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿.avatar img {
+    width: 100%;
+    height: auto;
+}
+.section {
+    margin-bottom: 3.2em;
+}
+.section-header {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 1em;
+}
+.tag-section-title {
+    margin-bottom: 1em;
+}
+.section-header h2 {
+    font-size: 0.8em;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.post-tag {
+    background: #ccc;
+    padding: 0.6em;
+    margin-right: 0.2em;
+    font-weight: bold;
+    color: #555;
+    font-size: 0.8em;
 }
 
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+body {
+    font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
+}
+a.navbar-brand {
+    font-weight: bold;
+}
+.navbar-right {
+    margin-right: 0;
+}
+.navbar-default {
+    text-transform: uppercase;
+    background: #f5f5f5;
+    border-radius: 0;
+    border-bottom: 3px solid #bbb;
+}
+.root {
+    margin: auto;
+    float: none;
+}
+
+html, body, .body-content {
+    height: 100%;
+}
+
+body {
+    background: #ddd;
+}
+
+.root {
+    background: #fff;
+    padding: 1.8em;
+}
+
+.jumbotron {
+    background: transparent;
 }
 
 /* Set widths on the form inputs since otherwise they're 100% wide */

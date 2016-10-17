@@ -8,6 +8,8 @@ namespace YogaCore.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ExperienceId { get; set; }
 
+        public Guid PersonId { get; set; }
+
         public virtual Person Person { get; set; }
 
         public string JobPosition { get; set; }

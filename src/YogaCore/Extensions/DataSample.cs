@@ -72,8 +72,9 @@ namespace YogaCore.Extensions
             {
                 fileContent = reader.ReadToEnd();
             }
-            Person sampleUser = JsonConvert.DeserializeObject<Person>(fileContent);
-
+            Person sampleUser = await Task.Factory.StartNew(() =>
+                JsonConvert.DeserializeObject<Person>(fileContent));
+                
             // If did not exist, create new person
             var existPerson = await userManager.FindByEmailAsync(sampleUser.Email);
             if (existPerson == null)

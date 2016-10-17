@@ -9,6 +9,8 @@ namespace YogaCore.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid SkillId { get; set; }
 
+        public Guid PersonId { get; set; }
+
         public virtual Person Person { get; set; }
 
         /// <summary>

@@ -252,3 +252,4 @@ lib/
 *.min.js
 *.min.css
 .vscode
+/src/YogaCore/wwwroot/js

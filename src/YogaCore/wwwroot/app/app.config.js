@@ -23,5 +23,8 @@
                     templateUrl: '/app/persons/person-form.html',
                     controller: 'PersonFormController as person'
                 })
-        });
+        })
+        .config(["$locationProvider", function ($locationProvider) {
+            $locationProvider.html5Mode(true);
+        }]);;
 })();

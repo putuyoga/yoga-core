@@ -22,6 +22,12 @@ namespace YogaCore.Controllers
 
             return View();
         }
+        public IActionResult Explore()
+        {
+            ViewData["Message"] = "Explore.";
+
+            return View();
+        }
 
         public IActionResult Error()
         {

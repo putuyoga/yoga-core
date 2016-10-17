@@ -1,14 +1,21 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace YogaCore.Models
 {
     public class Education
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid EducationId { get; set; }
+        public Education()
+        {
+            EducationId = Guid.NewGuid().ToString();
+        }
 
-        public Guid PersonId { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public string EducationId { get; set; }
+
+        [ForeignKey("Person")]
+        public string PersonId { get; set; }
 
         public virtual Person Person { get; set; }
 

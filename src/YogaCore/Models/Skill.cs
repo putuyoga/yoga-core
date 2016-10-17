@@ -6,10 +6,17 @@ namespace YogaCore.Models
 {
     public class Skill
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid SkillId { get; set; }
+        public Skill()
+        {
+            SkillId = Guid.NewGuid().ToString();
+        }
 
-        public Guid PersonId { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public string SkillId { get; set; }
+
+        [ForeignKey("Person")]
+        public string PersonId { get; set; }
 
         public virtual Person Person { get; set; }
 

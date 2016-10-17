@@ -21,7 +21,19 @@ namespace YogaCore.Data
 
         public Person Get(string id)
         {
-            return _context.Persons.FirstOrDefault(person => person.Id == id);
+            var person = _context.Persons
+                .Single(p => p.Id == id);
+
+            _context.Skills
+                .Where(s => s.PersonId == id).Load();
+
+            _context.Educations
+                .Where(e => e.PersonId == id).Load();
+
+            _context.Experiences
+                .Where(e => e.PersonId == id).Load();
+
+            return person;
         }
 
         public IEnumerable<Person> Get()

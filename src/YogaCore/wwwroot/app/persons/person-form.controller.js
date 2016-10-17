@@ -18,6 +18,8 @@
         // properties
         vm.data = {
             firstName: '',
+            username: '',
+            email: '',
             birthDate: null,
             sex: 0
         };

@@ -4,9 +4,19 @@
     <div class="col-md-6">
         <form role="form">
             <div class="form-group">
+                <label for="firstNameInput">Username</label>
+                <input type="text" class="form-control input-block-level" id="usernameInput" placeholder="Enter your username" data-ng-model="person.data.username" data-ng-disabled="person.isBusy" required>
+                <small class="text-muted">The unique one of course</small>
+            </div>
+            <div class="form-group">
+                <label for="emailInput">Email</label>
+                <input type="text" class="form-control input-block-level" id="emailInput" placeholder="Enter your email" data-ng-model="person.data.email" data-ng-disabled="person.isBusy" required>
+                <small class="text-muted">Frequently used</small>
+            </div>
+            <div class="form-group">
                 <label for="firstNameInput">First Name</label>
-                <input type="text" class="form-control input-block-level" id="firstNameInput" placeholder="Enter your funny name" data-ng-model="person.data.firstName" data-ng-disabled="person.isBusy" required>
-                <small class="text-muted">first name must be funny and elegance or i will kill your cat.</small>
+                <input type="text" class="form-control input-block-level" id="firstNameInput" placeholder="Enter your name" data-ng-model="person.data.firstName" data-ng-disabled="person.isBusy" required>
+                <small class="text-muted">Should be clear and must same with your identity card.</small>
             </div>
             <div class="form-group">
                 <label for="birthDateInput">Birth Date</label>
@@ -25,9 +35,18 @@
     <div class="col-md-6">
         <div class="panel panel-default">
             <div class="panel-body">
-                <p>Hello, this is some sample text. Why you read this text ? you just waste your precious 5 seconds of your life. <small>Get a life dude!</small></p>
-                <p>Hello, this is some sample text. Why you read this text ? you just waste your precious 5 seconds of your life. <small>Get a life dude!</small></p>
-                <p>Hello, this is some sample text. Why you read this text ? you just waste your precious 5 seconds of your life. <small>Get a life dude!</small></p>
+                <p>
+                    <b>TODO:</b>
+                    <ul>
+                        <li>Last name</li>
+                        <li>Website</li>
+                        <li>Experiences</li>
+                        <li>Skills</li>
+                        <li>Educations</li>
+                        <li>Experiences</li>
+                        <li>...etc</li>
+                    </ul>
+                </p>
             </div>
         </div>
     </div>

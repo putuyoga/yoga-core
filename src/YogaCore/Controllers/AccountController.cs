@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Identity;
 using YogaCore.Models;
 using YogaCore.ViewModels.Accounts;
 using YogaCore.Data;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -20,7 +22,10 @@ namespace YogaCore.Controllers
         private UserManager<Person> _userManager;
         private IPersonRepository _repository;
 
-        public AccountController(IIdentityManager accountManager, UserManager<Person> userManager, IPersonRepository repository)
+        public AccountController(
+            IIdentityManager accountManager, 
+            UserManager<Person> userManager, 
+            IPersonRepository repository)
         {
             _accountManager = accountManager;
             _userManager = userManager;
@@ -63,7 +68,6 @@ namespace YogaCore.Controllers
             return View(model);
         }
 
-
         //
         // GET: /Account/Register
         [HttpGet]
@@ -84,11 +88,11 @@ namespace YogaCore.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new Person { UserName = model.Email, Email = model.Email };
+                var user = new Person { UserName = model.Username, Email = model.Username };
                 var result = await _accountManager.RegisterAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await _accountManager.LoginAsync(model.Email, model.Password);
+                    await _accountManager.LoginAsync(model.Username, model.Password);
                     return RedirectToLocal(returnUrl);
                 }
                 AddErrors(result);

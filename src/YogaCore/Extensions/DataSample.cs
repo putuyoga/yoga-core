@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System.Threading.Tasks;
-using YogaCore.Data;
 using YogaCore.Models;
 using System.IO;
 using Newtonsoft.Json;

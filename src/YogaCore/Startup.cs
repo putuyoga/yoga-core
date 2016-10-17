@@ -45,8 +45,12 @@ namespace YogaCore
             services.AddMvc();
 
             // Add database context with sqlite database
-            string dbConnectionString = Configuration.GetConnectionString("DefaultSQLITEConnectionString");
-            services.AddDbContext<MatchContext>(options => options.UseSqlite(dbConnectionString));
+            //string dbConnectionString = Configuration.GetConnectionString("DefaultSQLITEConnectionString");
+            //services.AddDbContext<MatchContext>(options => options.UseSqlite(dbConnectionString));
+
+            // If you are on windows platform, you can use sql server instead sqlite
+            string dbConnectionString = Configuration.GetConnectionString("DefaultMSSQLConnectionString");
+            services.AddDbContext<MatchContext>(options => options.UseSqlServer(dbConnectionString));
 
             services.AddIdentity<Person, IdentityRole>()
                 .AddEntityFrameworkStores<MatchContext>()
@@ -54,9 +58,6 @@ namespace YogaCore
 
             services.AddSingleton<IPersonRepository, PersonRepository>();
             services.AddSingleton<IIdentityManager, PersonManager>();
-            // If you are on windows platform, you can use sql server instead sqlite
-            // string dbConnectionString = Configuration.GetConnectionString("DefaultMSSQLConnectionString");
-            // services.AddDbContext<MatchContext>(options => options.UseSqlServer(dbConnectionString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

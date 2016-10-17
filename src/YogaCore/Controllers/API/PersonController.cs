@@ -28,6 +28,8 @@ namespace YogaCore.Controllers.API
                 .Select(person => new PersonJsonData()
                 {
                     Id = person.Id,
+                    Username = person.UserName,
+                    Email = person.Email,
                     FirstName = person.FirstName,
                     BirthDate = person.BirthDate,
                     Sex = person.Sex
@@ -50,6 +52,8 @@ namespace YogaCore.Controllers.API
             var jsonData = new PersonJsonData()
             {
                 Id = personEntity.Id,
+                Username = personEntity.UserName,
+                Email = personEntity.Email,
                 FirstName = personEntity.FirstName,
                 Sex = personEntity.Sex,
                 BirthDate = personEntity.BirthDate
@@ -64,11 +68,10 @@ namespace YogaCore.Controllers.API
         {
             if(ModelState.IsValid)
             {
-                var randomEmail = Guid.NewGuid().ToString() + "@changethis.com";
                 var user = new Person
                 {
-                    UserName = randomEmail,
-                    Email = randomEmail,
+                    UserName = value.Username,
+                    Email = value.Email,
                     BirthDate = value.BirthDate,
                     Sex = value.Sex,
                     FirstName = value.FirstName
@@ -92,9 +95,11 @@ namespace YogaCore.Controllers.API
                 {
                     return NotFound();
                 }
-                
+
                 // Update the selected value
+                entity.UserName = value.Username;
                 entity.FirstName = value.FirstName;
+                entity.Email = value.Email;
                 entity.BirthDate = value.BirthDate;
                 entity.Sex = value.Sex;
 

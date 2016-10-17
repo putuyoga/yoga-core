@@ -8,8 +8,9 @@ namespace YogaCore.Models
 {
     public class Person : IdentityUser
     {
+        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid PersonId { get; set; }
+        public override string Id { get; set; }
 
         [Required]
         public string FirstName { get; set; }
@@ -38,11 +39,11 @@ namespace YogaCore.Models
         [Range(0, 1)]
         public Sex Sex { get; set; }
 
-        public ICollection<Skill> Skills { get; set; }
+        public virtual ICollection<Skill> Skills { get; set; }
 
-        public ICollection<Experience> Experiences { get; set; }
+        public virtual ICollection<Experience> Experiences { get; set; }
 
-        public ICollection<Education> Educations { get; set; }
+        public virtual ICollection<Education> Educations { get; set; }
 }
 
     public enum Sex

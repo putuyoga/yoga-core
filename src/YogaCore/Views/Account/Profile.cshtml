@@ -1,27 +1,46 @@
 ﻿@using YogaCore.Models
+@using YogaCore.Extensions;
+
 @{
     var user = ViewData["User"] as Person;
+
+    // Check image first
+    if(string.IsNullOrEmpty(user.ImageUrl))
+    {
+        user.ImageUrl = "/images/empty-avatar.png";
+    }
+
+    // Check name
+    if(string.IsNullOrEmpty(user.FirstName))
+    {
+        user.FirstName = "Insert Name";
+    }
+
+    // Check title
+    if (string.IsNullOrEmpty(user.Title))
+    {
+        user.Title = "Job Position";
+    }
 }
 <div id="section-personal" class="personal section">
     <div class="row">
         <div class="col-md-10">
-            <h1>@user.FirstName @user.LastName</h1>
+            <h1>
+                @user.FirstName @user.LastName 
+                <button type="button" class="btn btn-default btn-xs" data-ui-sref="person_edit({ personId: entity.id })" href="/Admin/edit/5504a401-6807-4b69-b7cd-5e1eb178a6bc">
+                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> edit
+                </button>
+            </h1>
             <div id="currently-at-container" class="job">
                 <div class="job has-tooltip">
-                    Software Engineer at Mitrais
+                    @user.Title
                 </div>
             </div>
             <div class="meta">
                 <span class="icon-location"></span>
-                Denpasar, Indonesia
-                <span class="icon-site"></span>
-                <a href="http://putuyoga.com"> http://putuyoga.com </a>
-                <span class="icon-twitter"></span>
-                <a href="https://twitter.com/putuyoga" rel="me" class="url">putuyoga</a>
-                <span class="icon-github"></span>
-                <a href="https://github.com/putuyoga" rel="me" class="url">putuyoga</a>
+                @user.Location
+                <a href="@user.Website"> website </a>
             </div>
-
         </div>
 
         <div class="col-md-2 avatar-wrapper">
@@ -35,49 +54,68 @@
 
 <div class="section">
     <div class="section-header section-opener">
-        <h2>Skillset</h2>
+        <h2>
+            Skillset 
+            <button type="button" class="text-align-right btn btn-default btn-xs" data-ui-sref="person_edit({ personId: entity.id })" href="/Admin/edit/5504a401-6807-4b69-b7cd-5e1eb178a6bc">
+                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> edit
+            </button>
+        </h2>
     </div>
 
     <div class="tag-section">
         <div class="tag-section-title">Any skill you have</div>
         <div>
-            @foreach (var skill in user.Skills)
+            @if(user.Skills != null) { 
+                @foreach (var skill in user.Skills)
+                {
+                    <span class="post-tag">@skill.Name</span>
+                }
+            }
+            else
             {
-                <span class="post-tag">@skill.Name</span>
+                <span style="color: lightgrey">does not have any skill yet to show</span>
             }
         </div>
     </div>
 </div>
-
-
-
 <div class="section cv-section-type multi-section" id="cv-Experience">
     <div class="section-header section-opener">
         <h2 class="h4">
-            Experience
+            Experience 
+            <button type="button" class="text-align-right btn btn-default btn-xs" data-ui-sref="person_edit({ personId: entity.id })" href="/Admin/edit/5504a401-6807-4b69-b7cd-5e1eb178a6bc">
+                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> edit
+            </button>
         </h2>
     </div>
 
     <div class="repeater cv-section highlight first expanded last collapsible" id="Experience-584419">
         <div class="display">
-            @foreach (var exp in user.Experiences) {
-                <div class="preview">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <h3 class="h4">
-                                @exp.JobPosition
-                                <span class="location">
-                                    @exp.CompanyName
-                                </span>
-                            </h3>
-                        </div>
-                        <div class="col-md-4">
-                            <p class="time-frame">
-                                @exp.Since → @exp.Until
-                            </p>
+            @if (user.Experiences != null)
+            {
+                @foreach (var exp in user.Experiences)
+                {
+                    <div class="preview">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h3 class="h4">
+                                    @exp.JobPosition
+                                    <span class="location">
+                                        @exp.CompanyName
+                                    </span>
+                                </h3>
+                            </div>
+                            <div class="col-md-4">
+                                <p class="time-frame">
+                                    @exp.Since.ToStringMonthYear() → @exp.Until.ToStringMonthYear()
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
+                }
+            }
+            else
+            {
+                <span style="color: lightgrey">does not have any experience yet to show</span>
             }
         </div>
     </div>
@@ -87,33 +125,42 @@
 <div class="section cv-section-type multi-section" id="cv-Education">
     <div class="section-header section-opener">
         <h2 class="h4">
-            Education
+            Education 
+            <button type="button" class="text-align-right btn btn-default btn-xs" data-ui-sref="person_edit({ personId: entity.id })" href="/Admin/edit/5504a401-6807-4b69-b7cd-5e1eb178a6bc">
+                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> edit
+            </button>
         </h2>
     </div>
 
     <div class="repeater cv-section highlight first expanded last collapsible" id="Education-584418">
         <div class="display">
-            @foreach (var school in user.Educations)
+            @if (user.Educations != null)
             {
-            <div class="preview">
-                <div class="row">
-                    <div class="col-md-8">
-                        <h3 class="h4">
-                            @school.Major                  
-                            <span class="location">
-                                @school.SchoolName
-                            </span>
-                        </h3>
-                    </div>
-                    <div class="col-md-4">
-                        <p class="time-frame">
-                            @school.Since → @school.Until
-                        </p>
+                @foreach (var school in user.Educations)
+                {
+                <div class="preview">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h3 class="h4">
+                                @school.Major                  
+                                <span class="location">
+                                    @school.SchoolName
+                                </span>
+                            </h3>
+                        </div>
+                        <div class="col-md-4">
+                            <p class="time-frame">
+                                @school.Since.ToStringMonthYear() → @school.Until.ToStringMonthYear()
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
+                }
+            }
+            else
+            {
+                <span style = "color: lightgrey">does not have any education yet to show </span>
             }
         </div>
     </div>
-
 </div>

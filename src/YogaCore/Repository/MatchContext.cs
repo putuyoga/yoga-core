@@ -7,7 +7,8 @@ namespace YogaCore.Models
     {
         public MatchContext(DbContextOptions<MatchContext> options)
             : base(options)
-        { }
+        {
+        }
 
         public DbSet<Person> Persons { get; set; }
         
